@@ -1,0 +1,57 @@
+void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n)
+
+{
+
+    int i = m + n - 1;
+
+    int i1 = m - 1;
+
+    int i2 = n - 1;
+
+    while(i1 >= 0 && i2 >= 0)
+
+    {
+
+        //从尾开始比较两个数组，哪个大把哪个放到nums1[i]位置
+
+        if(nums2[i2] > nums1[i1])
+
+        {
+
+            nums1[i] = nums2[i2];
+
+            --i2;
+
+            --i;
+
+        }
+
+        else
+
+        {
+
+            nums1[i] = nums1[i1];
+
+            --i1;
+
+            --i;
+
+        }
+
+    }
+
+    //如果第一个数组先结束，第二个数组没结束直接把第二个拷贝到第一个数组
+
+            while(i2 >=0)
+
+        {
+
+            nums1[i] = nums2[i2];
+
+            --i2;
+
+            --i;
+
+        }
+
+}
