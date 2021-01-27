@@ -1,0 +1,49 @@
+//逆置
+
+void Reverse (int* nums,int left,int right)
+
+{
+
+    while(left < right)
+
+    {
+
+        int tem = nums[left];
+
+        nums[left] = nums[right];
+
+        nums[right] = tem;
+
+        left++;
+
+        right--;
+
+    }
+
+}
+
+void rotate(int* nums, int numsSize, int k)
+
+{
+
+    //如果k>numsSize下面的逆置区间会减到负数，如果逆置numsSize次相当于没有逆置，
+
+    //使用当K>=numsSize时可以k%numsSize
+
+    if(k >= numsSize)
+
+    {
+
+        k %= numsSize;
+
+    }
+
+    //进行三次逆置
+
+    Reverse (nums , 0 , numsSize - k - 1);
+
+    Reverse (nums , numsSize - k , numsSize - 1);
+
+    Reverse (nums , 0 , numsSize - 1);
+
+}
