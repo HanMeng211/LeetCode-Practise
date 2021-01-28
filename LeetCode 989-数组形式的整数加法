@@ -1,0 +1,68 @@
+//逆置
+ void Reverse(int* retArr,int left,int right)
+ {
+     while(left < right)
+     {
+         int tem = retArr[left];
+         retArr[left] = retArr[right];
+         retArr[right] = tem;
+         ++left;
+         --right;
+     }
+ }
+int* addToArrayForm(int* A, int ASize, int K, int* returnSize)
+{
+    //求k的位数
+    int num = K;
+    int ksize = 0;
+    while(num)
+    {
+        ++ksize;
+        num /= 10;
+    }
+    //比较A和k哪个大
+    int n = ASize > ksize ? ASize + 1 : ksize + 1; 
+    //开辟大的位数+1个空间
+    int* retArr = malloc(sizeof(int) * n); 
+    int Ai = ASize - 1;
+    int next = 0; //进位
+    int reti = 0; //最终逆置前数组的下标
+    while(Ai >= 0 || K > 0)
+    {
+            //取出要加的K中的数
+            int Knum = K % 10;
+            K /= 10;\
+            //解决A先结束问题
+            int Anum = 0;
+            //取出A中要加的数
+            if(Ai >= 0)
+            {
+                Anum = A[Ai];
+                --Ai;
+            }
+            int ret = Anum + Knum + next;
+            //判断是否进位
+            if(ret >= 10)
+            {
+                next = 1;
+                ret -= 10;
+            }
+            else
+            {
+                next = 0;
+            }
+            retArr[reti] = ret;
+            ++reti;
+    }
+    //如果最后一位进位，直接让下一位等于1
+    if(next == 1)
+    {
+        retArr[reti] = 1;
+        ++reti;
+    }
+    //输出元素的个数
+    *returnSize = reti;
+    //逆置
+    Reverse(retArr , 0 , reti - 1);
+    return retArr;
+}
