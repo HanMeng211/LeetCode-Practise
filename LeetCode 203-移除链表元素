@@ -1,0 +1,42 @@
+struct ListNode* removeElements(struct ListNode* head, int val)
+{
+    //如果是空链表
+    if(head == NULL)
+    {
+        return head;
+    }
+    struct ListNode* cur = head;
+    //相当于一个头指针
+    struct ListNode* newhead = NULL;
+    //相当于一个尾指针，用于找下一个位置
+    struct ListNode* tail = NULL;
+    while(cur)
+    {
+        //保存下一个节点
+         struct ListNode* next = cur->next;
+         //当值不等于val，放入newhead
+         if(cur->val != val)
+         {
+             //判断新空间newhead是否为空
+             if(newhead == NULL)
+             {
+                 newhead = tail = cur;
+             }
+             else
+             {
+                 tail->next = cur;
+                 tail = cur;
+             }
+         }
+         //若cur->val等于cur直接释放掉
+         else
+         {
+             free(cur);
+         }
+         cur = next;
+    }
+    //处理尾
+    if(tail)
+      tail->next = NULL;
+    return newhead;
+}
