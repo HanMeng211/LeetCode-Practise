@@ -1,0 +1,20 @@
+struct ListNode* FindKthToTail(struct ListNode* pListHead, int k )
+{
+   struct ListNode* fast = pListHead;
+   struct ListNode* slow = pListHead;
+    //先让两个指针相隔K个节点
+    for(int i = 0;i < k;++i)
+    {
+        //即不存在倒数第K个数的情况
+        if(fast == NULL)
+        return NULL;
+        fast = fast->next;
+    }
+    //让两个指针开始同时走
+    while(fast)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+    return slow;
+}
