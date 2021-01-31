@@ -1,0 +1,27 @@
+struct ListNode* reverseList(struct ListNode* head)
+{
+    if(head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    struct ListNode* n1 = NULL;
+    struct ListNode* n2 = NULL;
+    struct ListNode* n3 = NULL;
+    n2 = head;
+    //n3用于保存下一个节点的地址，防止n2指向n1后找不到下一个节点
+    n3 = head->next;
+    while(n2)
+    {
+        //n2指向n1
+        n2->next = n1;
+        //n1向后移到n2位置
+        n1 = n2;
+        //n2向后移到n3位置
+        n2 = n3;
+        if(n3)
+        {
+            n3 = n3->next;
+        } 
+    }
+    return n1;
+}
