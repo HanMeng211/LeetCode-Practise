@@ -1,0 +1,44 @@
+class PalindromeList 
+{
+public:
+    bool chkPalindrome(ListNode* A) 
+    {   //求中间节点
+        ListNode* fast = A;
+        ListNode* slow = A;
+        while(fast && fast->next)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        //逆置
+        ListNode* tem = slow;//保存slow位置，给p
+        slow = NULL;//制空slow,因为最后一个节点要指向
+        ListNode* p = tem;
+        ListNode* p1 = p->next;
+        while(p)
+        {
+            p->next = slow;
+            slow = p;
+            p = p1;
+            //防止p1=NULL还求next
+            if(p1)
+            {
+                p1 = p1->next;
+            }
+        }
+        //判断前后是否相等
+        while(A && slow)
+        {
+            if(A->val == slow->val)
+            {
+                A = A->next;
+                slow = slow->next;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+};
