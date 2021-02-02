@@ -1,3 +1,4 @@
+//不能修改给定的链表
 struct ListNode *detectCycle(struct ListNode *head) 
 {
         struct ListNode * fast = head;
