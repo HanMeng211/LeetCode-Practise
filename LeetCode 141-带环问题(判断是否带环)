@@ -1,0 +1,15 @@
+bool hasCycle(struct ListNode *head) 
+{
+    struct ListNode * slow = head;
+    struct ListNode * fast = head;
+    //若fast或fast->next为空不带环
+    while(fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+        //若两个指针指向同一位置，则代换
+        if(fast == slow)
+        return true;
+    }
+    return false;
+}
