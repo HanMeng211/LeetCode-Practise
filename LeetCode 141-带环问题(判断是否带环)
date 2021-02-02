@@ -1,3 +1,4 @@
+//判断是否带环
 bool hasCycle(struct ListNode *head) 
 {
     struct ListNode * slow = head;
