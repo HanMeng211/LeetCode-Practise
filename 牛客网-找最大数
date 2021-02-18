@@ -11,8 +11,8 @@ int Max(int a,int b)
 }
 int main()
 {
-	int a, b, c, d;
-	scanf("%d %d %d %d", &a, &b, &c, &d);
+    int a, b, c, d;
+    scanf("%d %d %d %d", &a, &b, &c, &d);
     int Max1 = Max(a,b);
     int Max2 = Max(c,d);
     int Max3 = Max(Max1,Max2);
