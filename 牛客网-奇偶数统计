@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main()
+{
+    int N;
+    //奇数个数
+    int OddCount = 0;
+    //偶数个数
+    int EvenCount = 0;
+    scanf("%d",&N);
+    int arr[N];
+    for(int i = 0;i < N;i++)
+    {
+        arr[i] = i + 1;
+        if(arr[i] % 2 == 0)
+        {
+            EvenCount = EvenCount + 1;
+        }
+        else
+        {
+            OddCount = OddCount + 1;
+        }
+    }
+    printf("%d %d\n",OddCount,EvenCount);
+    return 0;
+}
