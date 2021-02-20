@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{
+	int count = 0;
+	//1-2019
+	for (int i = 1; i <= 2019; i++)
+	{
+		int tem = i;
+		while (tem != 0)
+		{
+            //如果有9 count加1break
+			if (tem % 10 == 9)
+			{
+				count = count + 1;
+				break;
+			}
+            //如果没9继续取它的每一位
+			else
+			{
+				tem = tem / 10;
+			}
+		}
+	}
+	printf("%d\n", count);
+	return 0;
+}
