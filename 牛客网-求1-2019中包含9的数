@@ -8,14 +8,14 @@ int main()
 		int tem = i;
 		while (tem != 0)
 		{
-            //如果有9 count加1break
-			if (tem % 10 == 9)
+                        //如果有9 count加1break
+	                if (tem % 10 == 9)
 			{
 				count = count + 1;
 				break;
 			}
-            //如果没9继续取它的每一位
-			else
+                         //如果没9继续取它的每一位
+		        else
 			{
 				tem = tem / 10;
 			}
