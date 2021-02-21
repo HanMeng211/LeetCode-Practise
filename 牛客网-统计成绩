@@ -42,7 +42,8 @@ int main()
     //输入所有成绩
     for(int i = 0;i < n;i++)
     {
-        scanf("%f ",&arr[i]);
+        //此处%f后不要空格
+        scanf("%f",&arr[i]);
     }
     BubbleSort(arr,n);
     float average = Average(arr,n);
