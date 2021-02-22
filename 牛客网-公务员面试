@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
-//对七个成绩升序排序
+//对七个成绩升序排序;p[0]最小值p[6]最大值
 void BubbleSort(int* p, int n)
 {
 	int end = n;
@@ -38,6 +38,7 @@ int main()
 	{
 		sum += arr[i];
 	}
+	//求平均数
 	avg = (float)sum / 5;
 	printf("%.2f", avg);
 	return 0;
