@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
+//对七个成绩升序排序
 void BubbleSort(int* p, int n)
 {
 	int end = n;
@@ -32,6 +33,7 @@ int main()
 		scanf("%d", &arr[i]);
 	}
 	BubbleSort(arr, 7);
+	//取arr[1]~arr[5]即去掉最大值和最小值
 	for (int i = 1; i < 6; i++)
 	{
 		sum += arr[i];
