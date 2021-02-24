@@ -1,0 +1,21 @@
+
+#include<stdio.h>
+int main()
+{
+    int n;
+    //多行输入
+    while(scanf("%d",&n) != EOF)
+    {
+        //打印行
+        for(int i = 0;i < n;i++)
+        {
+            //每行多少个*
+            for(int j = 0;j <= i;j++)
+            {
+                printf("* ");
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
