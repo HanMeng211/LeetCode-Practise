@@ -1,0 +1,39 @@
+#include<stdio.h>
+int main()
+{
+    int n;
+    while(scanf("%d",&n) != EOF)
+    {
+        //上半部分的行
+        for(int i = 0;i <= n;i++)
+        {
+            //上半部分的空格
+            for(int j = 0;j < n - i;j++)
+            {
+                printf(" ");
+            }
+            //上半部分的*
+            for(int j = 0;j < i + 1;j++)
+            {
+                printf("* ");
+            }
+            printf("\n");
+        }
+        //下半部分的行
+        for(int i = 0;i < n;i++)
+        {
+            //下半部分的空格
+            for(int j = 0;j < i + 1;j++)
+            {
+                printf(" ");
+            }
+            //下半部分的*
+            for(int j = 0;j < n - i;j++)
+            {
+                printf("* ");
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
