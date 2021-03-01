@@ -1,0 +1,60 @@
+//方法一：
+#include<stdio.h>
+int main()
+{
+    int n;
+    while(scanf("%d",&n) != EOF)
+    {
+        //控制行
+        for(int i = 0;i < n;i++)
+        {
+            //注意*后面的空格
+            //控制每行的空格和*
+            for(int j = 0;j < n;j++)
+            {
+                if(i == j)
+                {
+                    printf("*");
+                }
+                else
+                {
+                    printf(" ");
+                }
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+//方法二
+#include<stdio.h>
+int main()
+{
+	int n;
+	while (scanf("%d", &n) != EOF)
+	{
+		//控制行
+		for (int i = 0; i < n; i++)
+		{
+			//控制空白
+			for (int j = 0; j < i; j++)
+			{
+				printf(" ");
+			}
+			//打印*
+			printf("*");
+			//打印*后面的空白
+			for (int j = i + 1; j < n; j++)
+			{
+				printf(" ");
+			}
+			printf("\n");
+		}
+	}
+	return 0;
+}
