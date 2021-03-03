@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{
+    int n;
+    while(scanf("%d",&n) != EOF)
+    {
+        //控制行
+        for(int i = 0;i < n;i++)
+        {
+            //控制列
+            for(int j = 0;j < n;j++)
+            {
+                if((i == j) || (j == 0) || (i == n - 1))
+                {
+                    printf("* ");
+                }
+                else
+                {
+                    printf("  ");
+                }
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
