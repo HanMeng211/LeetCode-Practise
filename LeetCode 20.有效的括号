@@ -1,0 +1,144 @@
+typedef char STDataType;
+typedef struct Stack
+{
+	STDataType* a;//动态数组
+	int top;  //栈顶
+	int capacity;  //容量
+}Stack;
+//初始化栈
+void StackInit(Stack* pst);
+//销毁栈
+void StackDestroy(Stack* pst);
+//入栈
+void StackPush(Stack* pst, STDataType data);
+//出栈
+void StackPop(Stack* pst);
+//获取栈中有效元素的个数
+int StackSize(Stack* pst);
+//获取栈顶元素
+STDataType StackTop(Stack* pst);
+//检测栈是否为空，为空返回1，非空返回0
+int StackEmpty(Stack* pst);
+//初始化栈
+void StackInit(Stack* pst)
+{
+	assert(pst);
+	pst->a = (STDataType*)malloc(sizeof(STDataType)* 4);
+	if (pst->a == NULL)
+	{
+		printf("malloc fail");
+	}
+	pst->top = 0;
+	pst->capacity = 4;
+}
+//销毁栈
+void StackDestroy(Stack* pst)
+{
+	assert(pst);
+	free(pst->a);
+	pst->a = NULL;
+	pst->top = 0;
+	pst->capacity = 0;
+}
+//入栈
+void StackPush(Stack* pst, STDataType data)
+{
+	assert(pst);
+	//空间不够需要增容
+	if (pst->top == pst->capacity)
+	{
+		//增容为原来的2倍
+		char* tem = (STDataType*)realloc(pst->a, sizeof(STDataType)* pst->capacity * 2);
+		if (tem == NULL)
+		{
+			printf("realloc fail");
+			exit(-1);
+		}
+		pst->a = tem;
+		pst->capacity = pst->capacity * 2;
+	}
+	pst->a[pst->top] = data;
+	pst->top++;
+}
+//出栈
+void StackPop(Stack* pst)
+{
+	assert(pst);
+	//判断栈是否为空
+	//相当于assert(pst->top != 0);
+	assert(!StackEmpty(pst));
+	pst->top--;
+}
+//获取栈中有效元素的个数
+int StackSize(Stack* pst)
+{
+	assert(pst);
+	//因为初始化top是0,如果初始化top是-1则返回top+1;
+	return pst->top;
+}
+//获取栈顶元素
+STDataType StackTop(Stack* pst)
+{
+	assert(pst);
+	assert(!StackEmpty(pst));
+	return pst->a[pst->top - 1];
+}
+//检测栈是否为空，为空返回1，非空返回0
+int StackEmpty(Stack* pst)
+{
+	assert(pst);
+	return pst->top == 0 ? 1 : 0;
+}
+
+bool isValid(char * s)
+{
+    Stack st;
+    StackInit(&st);
+    while(*s)
+    {
+        //如果s指向（ { [ 则入栈
+        if(*s == '(' || *s == '[' || *s == '{')
+        {
+            StackPush(&st,*s);
+            ++s;
+        }
+        else
+        {
+            //栈是空的 防止eg:)]}这种情况
+            if(StackEmpty(&st))
+            {
+                StackDestroy(&st);
+                return false;
+            }
+            //若*s与top不匹配直接false
+            char top = StackTop(&st);
+            StackPop(&st);
+            if((*s == ')' && top != '(')
+            || (*s == ']' && top != '[')
+            || (*s == '}' && top != '{'))
+            {
+                StackDestroy(&st);
+                return false;
+            }
+            //若*s与top匹配++s继续比较
+            else
+            {
+                ++s;
+            }
+        }
+    }
+    //如果栈是空则匹配上了，因为上面匹配就出栈直到，
+    //匹配完栈为空
+    if(StackEmpty(&st))
+    {
+        //虽然是空但是空间还在
+        StackDestroy(&st);
+        return true;
+    }
+    //防止eg：[ ( { 这种情况
+    else
+    {
+        StackDestroy(&st);
+        return false;
+    }
+}
