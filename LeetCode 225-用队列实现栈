@@ -1,0 +1,219 @@
+typedef int QDatatype;
+//链式结构：表示队列
+typedef struct QueueNode
+{
+	QDatatype data;
+	//指向下一个节点的指针
+	struct QueueNode* next;
+}QueueNode;
+
+//队列的结构
+typedef struct Queue
+{
+	QueueNode* front;//头指针
+	QueueNode* tail;//尾指针
+}Queue;
+//初始化队列
+void QueueInit(Queue* pq);
+//销毁队列
+void QueueDestroy(Queue* pq);
+//队尾入队列
+void QueuePush(Queue* pq, QDatatype x);
+//队头出队列
+void QueuePop(Queue* pq);
+//检测队列是否为空，为空返回1，非空返回0
+int QueueEmpty(Queue* pq);
+//获取队列中有效元素的个数
+int QueueSize(Queue* pq);
+//获取队列头部元素
+QDatatype QueueFront(Queue* pq);
+//获取队列队尾元素
+QDatatype QueueBack(Queue* pq);
+//初始化队列
+void QueueInit(Queue* pq)
+{
+	assert(pq);
+	pq->front = pq->tail = NULL;
+}
+//销毁队列
+void QueueDestroy(Queue* pq)
+{
+	assert(pq);
+	QueueNode* cur = pq->front;
+	while (cur)
+	{
+		QueueNode* Next = cur->next;
+		free(cur);
+		cur = Next;
+	}
+	pq->front = pq->tail = NULL;
+}
+//队尾入队列
+void QueuePush(Queue* pq, QDatatype x)
+{
+	assert(pq);
+	QueueNode* newnode = (QueueNode*)malloc(sizeof(QueueNode));
+	newnode->data = x;
+	newnode->next = NULL;
+	if (pq->tail == NULL)
+	{
+		pq->front = pq->tail = newnode;
+	}
+	else
+	{
+		pq->tail->next = newnode;
+		pq->tail = newnode;
+	}
+}
+//队头出队列
+void QueuePop(Queue* pq)
+{
+	assert(pq);
+	//队列不能为空
+	assert(!QueueEmpty(pq));
+	//如果只有一个节点，防止tail野指针
+	if (pq->front == pq->tail)
+	{
+		free(pq->front);
+		pq->front = pq->tail = NULL;
+	}
+	//多个节点
+	else
+	{
+		QueueNode* Next = pq->front->next;
+		free(pq->front);
+		pq->front = Next;
+	}
+}
+//检测队列是否为空，为空返回1，非空返回0
+int QueueEmpty(Queue* pq)
+{
+	assert(pq);
+	return pq->front == NULL ? 1 : 0;
+}
+//获取队列中有效元素的个数
+int QueueSize(Queue* pq)
+{
+	assert(pq);
+	int count = 0;
+	QueueNode* cur = pq->front;
+	while (cur)
+	{
+		++count;
+		cur = cur->next;
+	}
+	return count;
+}
+//获取队列头部元素
+QDatatype QueueFront(Queue* pq)
+{
+	assert(pq);
+	assert(!QueueEmpty(pq));
+	return pq->front->data;
+}
+//获取队列队尾元素
+QDatatype QueueBack(Queue* pq)
+{
+	assert(pq);
+	assert(!QueueEmpty(pq));
+	return pq->tail->data;
+}
+
+
+typedef struct
+{
+    //结构体中有两个队列
+    Queue q1;
+    Queue q2;
+
+} MyStack;
+
+/** Initialize your data structure here. */
+
+MyStack* myStackCreate()
+{
+    MyStack* pst = (MyStack*)malloc(sizeof(MyStack));
+    //初始化两个队列
+    QueueInit(&pst->q1);
+    QueueInit(&pst->q2);
+    return pst;
+}
+
+/** Push element x onto stack. */
+void myStackPush(MyStack* obj, int x)
+{
+    //将数据入到空的队列里
+    //若两个都为空随便导入哪个队列都可以
+    if(!QueueEmpty(&obj->q1))
+    {
+        QueuePush(&obj->q1,x);
+    }
+    else
+    {
+        QueuePush(&obj->q2,x);
+    }
+}
+
+/** Removes the element on top of the stack and returns that element. */
+int myStackPop(MyStack* obj)
+{
+    //假设q1为空q2不为空
+    Queue* emptyq = &obj->q1;
+    Queue* noemptyq = &obj->q2;
+    if(!QueueEmpty(&obj->q1))
+    {
+        emptyq = &obj->q2;
+        noemptyq = &obj->q1;
+    }
+    //将非空队列的n-1个数导入空队列
+    while(QueueSize(noemptyq) > 1)//此处直接给队列
+    {
+        //将非空队列的数导入空队列
+        QueuePush(emptyq,QueueFront(noemptyq));//直接给队列
+        //非空队列出数
+        QueuePop(noemptyq);
+    }
+    int top = QueueFront(noemptyq);
+    QueuePop(noemptyq);//直接给队列
+    return top;
+}
+
+/** Get the top element. */
+int myStackTop(MyStack* obj)
+{
+    if(!QueueEmpty(&obj->q1))
+    {
+        return QueueBack(&obj->q1);
+    }
+    else
+    {
+        return QueueBack(&obj->q2);
+    }
+}
+
+/** Returns whether the stack is empty. */
+bool myStackEmpty(MyStack* obj)
+{
+    return QueueEmpty(&obj->q1) && QueueEmpty(&obj->q2);
+}
+
+void myStackFree(MyStack* obj)
+{
+    QueueDestroy(&obj->q1);
+    QueueDestroy(&obj->q2);
+    free(obj);
+}
+
+/**
+ * Your MyStack struct will be instantiated and called as such:
+ * MyStack* obj = myStackCreate();
+ * myStackPush(obj, x);
+ 
+ * int param_2 = myStackPop(obj);
+ 
+ * int param_3 = myStackTop(obj);
+ 
+ * bool param_4 = myStackEmpty(obj);
+ 
+ * myStackFree(obj);
+*/
