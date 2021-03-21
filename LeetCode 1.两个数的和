@@ -5,11 +5,14 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
         {
             if(nums[i] + nums[j] == target)
             {
+                //按照提示申请动态数组
                 int* a = (int*)malloc(2 * sizeof(int));
+                //将得到的元素下标传入数组
                 a[0] = i;
                 a[1] = j;
-                //返回数组大小2
+                //返回的数组大小为2
                 *returnSize = 2;
+                //返回数组
                 return a;
             }
         }
