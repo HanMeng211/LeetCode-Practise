@@ -1,0 +1,12 @@
+struct TreeNode* mirrorTree(struct TreeNode* root){
+    if(root != NULL)
+    {
+        //交换每个节点的左右子节点即可
+        struct TreeNode* tem = root->left;
+        root->left = root->right;
+        root->right = tem;
+        mirrorTree(root->left);
+        mirrorTree(root->right);
+    }
+    return root;
+}
