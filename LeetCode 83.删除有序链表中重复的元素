@@ -1,0 +1,23 @@
+struct ListNode* deleteDuplicates(struct ListNode* head){
+    //链表为空或一个数直接返回
+    if(head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    struct ListNode* tail = head;
+    struct ListNode* tailnext = NULL;
+    while(tail)
+    {
+        tailnext = tail->next;
+        //如果两个数相等，tailnext往后走，直到两个数不相等
+        while(tailnext != NULL && tail->val == tailnext->val)
+        {
+            tailnext = tailnext->next;
+        }
+        //tail指向下一个不相等的数
+        tail->next = tailnext;
+        //移动tail到下一个不相等的位置
+        tail = tailnext;
+    }
+    return head;
+}
