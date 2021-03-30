@@ -1,0 +1,12 @@
+char* solve(char* str ) {
+    // write code here
+    int n = strlen(str) - 1;
+    int i = 0;
+    while(i <= n)
+    {
+        char tem = str[i];
+        str[i++] = str[n];
+        str[n--] = tem;
+    }
+    return str;
+}
