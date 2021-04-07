@@ -1,0 +1,24 @@
+int maximum(int a, int b){
+    return a > b?a:b;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int maximum(int a, int b){
+    long long c = a;
+    long long d = b;
+    return ((c+d) + fabs(c-d))/2;
+}
