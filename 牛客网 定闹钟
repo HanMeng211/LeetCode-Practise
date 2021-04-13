@@ -1,0 +1,30 @@
+#include<stdio.h>
+int main()
+{
+    int hour,minute,k;
+    scanf("%d:%d %d",&hour,&minute,&k);
+    int a = k / 60;  //一共a小时
+    int b = k % 60;  //余b分钟
+    //若大于24h则-24直到小于24为止
+    while(a >= 24)
+    {
+        a -= 24;
+    }
+    //现有时间+睡觉小时时长
+    hour +=a;
+    //若大于24则-24
+    if(hour >= 24)
+    {
+        hour -= 24;
+    }
+    //现有时间+除去睡觉小时时长余下的分钟
+    minute += b;
+    //若大于等于60小时+1，分钟-60
+    if(minute >=60)
+    {
+        hour += 1;
+        minute -= 60;
+    }
+    printf("%.2d:%.2d\n",hour,minute);
+    return 0;
+}
