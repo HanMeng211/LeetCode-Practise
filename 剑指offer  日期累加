@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+
+//获得每个月的天数
+int GetMonthDay(int year,int month)
+{
+    int days[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    int day = days[month];
+    //判断闰年
+    if(month == 2 && ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
+    {
+        day = 29;
+    }
+    return day;
+}
+void GetDate(int year,int month,int day,int count)
+{
+    //++day  count次
+    for(int i = 0;i < count;++i)
+    {
+        ++day;
+        int a = GetMonthDay(year,month);
+        //若day>此月天数，day=1,month+=1
+        if(day > a)
+        {
+            month += 1;
+            day = 1;
+            //若month>12，year+=1,month=1
+            if(month > 12)
+            {
+                year += 1;
+                month = 1;
+            }
+        }
+    }
+    printf("%d-%.2d-%.2d\n",year,month,day);
+}
+int main()
+{
+    int m;
+    cin>>m;
+    int year,month,day,count;
+    for(int i = 0;i < m;++i)
+    {
+        cin>>year>>month>>day>>count;
+        GetDate(year,month,day,count);
+    }
+    return 0;
+}
