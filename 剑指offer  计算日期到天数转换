@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+//获得每个月的天数
+int GetMonthDay(int year,int month)
+{
+    int days[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    int day = days[month];
+    //判断闰年
+    if(month == 2 && ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
+    {
+        day = 29;
+    }
+    return day;
+}
+//求一年的第几天
+int GetCount(int year,int month,int day)
+{
+    //count为日
+    int count = day;
+    //日+前几个月的天数
+    while(--month)
+    {
+        count += GetMonthDay(year,month);
+    }
+    return count;
+}
+
+int main()
+{
+    int year,month,day;
+    while(cin>>year>>month>>day)
+    {
+        cout<<GetCount(year,month,day)<<endl;
+    }
+    return 0;
+}
