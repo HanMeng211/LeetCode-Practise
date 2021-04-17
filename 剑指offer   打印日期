@@ -15,7 +15,7 @@ int GetMonthDay(int year,int month)
 
 void GetDate(int year,int n)
 {
-    //从一月开始
+    //从一月开始 day是第0天
     int month = 1;
     int day = 0;
     //让++day  n次
