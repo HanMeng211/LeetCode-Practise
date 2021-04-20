@@ -1,0 +1,27 @@
+int arraySign(int* nums, int numsSize){
+    int num = 1;
+    //遍历这个数组
+    for(int i = 0;i < numsSize;++i)
+    {
+        //如果有一个数为0，直接返回0
+        if(nums[i] == 0)
+        {
+            return 0;
+        }
+        //数组中没有0,判断最终数组中所有数乘积是正还是负
+        else
+        {
+            //如果为整数num*1
+            if(nums[i] > 0)
+            {
+                num *= 1;
+            }
+            //如果为负数num*(-1)
+            else
+            {
+                num *= (-1);
+            }
+        }
+    }
+    return num;
+}
