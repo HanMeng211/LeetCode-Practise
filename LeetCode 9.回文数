@@ -1,0 +1,16 @@
+bool isPalindrome(int x){
+    //小于0不是回文数
+    if(x < 0)
+    {
+        return false;
+    }
+    //逆置这个数和原数对比
+    int tem = x;
+    long a = 0;
+    while(tem)
+    {
+        a = a * 10 + tem % 10;
+        tem /= 10;
+    }
+    return a == x?true:false;
+}
