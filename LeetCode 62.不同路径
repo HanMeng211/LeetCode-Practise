@@ -1,0 +1,27 @@
+int uniquePaths(int m, int n){
+    //开一个m*n的二维数组空间
+    int** ar = (int**)malloc(sizeof(int*) * m);
+    for(int i = 0;i < m;i++)
+    {
+        ar[i] = (int*)malloc(sizeof(int) * n);
+    }
+    //第一行和第一列只有一种路线
+    //到达每个位置的路径数等于，其左边和上边位置的值的和
+    for(int _m = 0;_m < m;_m++)
+    {
+        for(int _n = 0;_n < n;_n++)
+        {
+            if(_m == 0 || _n == 0)
+            {
+                ar[_m][_n] = 1;
+            }
+            //除上下边界其余位置的路线情况，等于左边和上边位置值的和
+            else
+            {
+                ar[_m][_n] = ar[_m - 1][_n] + ar[_m][_n - 1];
+            }
+        }
+    }
+    //返回Finsh位置的值，即为路线的所以可能情况
+    return ar[m - 1][n - 1];
+}
