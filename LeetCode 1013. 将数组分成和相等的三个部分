@@ -1,0 +1,62 @@
+bool canThreePartsEqualSum(int* arr, int arrSize){
+    int sum = 0;
+    //求数组和
+    for(int i = 0;i < arrSize;++i)
+    {
+        sum += arr[i];
+    }
+    //数组%3!=0不会有三部分和相等
+    if(sum % 3 != 0)
+    {
+        return false;
+    }
+    else
+    {
+        //数组和/3
+        int val = sum / 3;
+        int sum1 = 0;
+        int sum2 = 0;
+        int sum3 = 0;
+        int i,j;
+        for(i = 0;i < arrSize;++i)
+        {
+            sum1 += arr[i];
+            //第一部分等于val
+            if(sum1 == val)
+            {
+                break;
+            }
+        }
+        //若数组下标超过倒数第2个数，则后两部分不满足
+        if(i == arrSize || i == arrSize - 1)
+        {
+            return false;
+        }
+        for(j = i + 1;j < arrSize;++j)
+        {
+            sum2 += arr[j];
+            //第二部分等于val
+            if(sum2 == val)
+            {
+                break;
+            }
+        }
+        //若数组下标超过倒数第2个数，则第三部分不满足
+        if(j == arrSize || j == arrSize - 1)
+        {
+            return false;
+        }
+        //剩余部分求和
+        for(int a = j + 1;a < arrSize;++a)
+        {
+            sum3 += arr[a];
+        }
+        //若第一部分第二部分第三部分和不相等，则不是
+        if(sum1 != sum2 || sum2 != sum3)
+        {
+            return false;
+        }
+        return true;
+
+    }
+}
