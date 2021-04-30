@@ -1,0 +1,20 @@
+void swap(int * a,int* b)
+{
+    int tem = *a;
+    *a = *b;
+    *b = tem;
+}
+void moveZeroes(int* nums, int numsSize){
+    int slow = 0,fast = 0;
+    //一个指针指向第n个0，一个指向第n个0后的第一个非0数字
+    while(fast < numsSize)
+    {
+        if(nums[fast] != 0)
+        {
+            swap(&nums[slow],&nums[fast]);
+            ++slow;
+        }
+        ++fast;
+    }
+    return nums;
+}
