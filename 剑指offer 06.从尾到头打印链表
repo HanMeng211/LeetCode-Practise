@@ -3,6 +3,7 @@ int* reversePrint(struct ListNode* head, int* returnSize){
     struct ListNode* phead = head;
     int count = 0;
     //注意此处while条件，当count为1只能phead->next
+    //若count为0，phead->next会少算一次
     while(phead)
     {
         ++count;
