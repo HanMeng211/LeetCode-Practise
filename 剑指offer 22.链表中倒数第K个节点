@@ -1,0 +1,29 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+struct ListNode* getKthFromEnd(struct ListNode* head, int k){
+    struct ListNode* slow = head;
+    struct ListNode* fast = head;
+    if(slow->next == NULL)
+    {
+        return slow;
+    }
+    //让慢指针走到倒数第k个位置
+    //即慢指针和快指针差k-1个位置
+    for(int i = k;i > 0;--i)
+    {
+        fast = fast->next;
+    }
+    while(fast)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+    return slow;
+}
