@@ -1,0 +1,27 @@
+int* reversePrint(struct ListNode* head, int* returnSize){
+    //计算链表中节点个数
+    struct ListNode* phead = head;
+    int count = 0;
+    //注意此处while条件，当count为1只能phead->next
+    while(phead)
+    {
+        ++count;
+        phead = phead->next;
+    }
+    //链表中的val存入一个数组
+    int* ar = (int*)malloc(sizeof(int*) * count);
+    for(int i = 0;i < count;++i)
+    {
+        ar[i] = head->val;
+        head = head->next;
+    }
+    //将数组反向存入一个新数组
+    int* arr = (int*)malloc(sizeof(int*) * count);
+    for(int j = 0;j < count;++j)
+    {
+        arr[j] = ar[count - 1 - j];
+    }
+    free(ar);
+    *returnSize = count;
+    return arr;
+}
