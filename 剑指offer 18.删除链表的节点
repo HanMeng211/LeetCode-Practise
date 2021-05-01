@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+struct ListNode* deleteNode(struct ListNode* head, int val){
+    struct ListNode* slow = head;
+    struct ListNode* fast = head;
+    //若删除头节点，返回第二个节点位置
+    //只有一个节点第二节点为空
+    if(slow->val == val)
+    {
+        return slow->next;
+    }
+    while(fast->next->val != val)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+    struct ListNode* tem = fast->next;
+    slow->next = tem->next;
+    free(tem);
+    return head;
+}
