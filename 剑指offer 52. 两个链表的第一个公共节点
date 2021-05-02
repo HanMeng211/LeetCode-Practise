@@ -1,0 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+    struct ListNode * pheadA = headA;
+    struct ListNode *pheadB = headB;
+    struct ListNode * pheadA1 = headA;
+    struct ListNode *pheadB1 = headB;
+    //求出两个链表的长度
+    int countA = 0,countB = 0;
+    while(pheadA1 != NULL)
+    {
+        pheadA1 = pheadA1->next;
+        ++countA;
+    }
+    while(pheadB1 != NULL)
+    {
+        pheadB1 = pheadB1->next;
+        ++countB;
+    }
+    //求两个链表长度的差值
+    int count = abs(countA - countB);
+    //让长度链表走差值步，最终让两个链表走同样的路
+    if(countA > countB)
+    {
+        for(int i = 0;i < count;++i)
+        {
+            pheadA = pheadA->next;
+        }
+    }
+    else
+    {
+        for(int i = 0;i < count;++i)
+        {
+            pheadB = pheadB->next;
+        }
+    }
+    //若两个指针指向同一个位置则，是公共节点
+    while(pheadA != pheadB && pheadA && pheadB)
+    {
+        pheadA = pheadA->next;
+        pheadB = pheadB->next;
+    }
+    return pheadA;
+}
