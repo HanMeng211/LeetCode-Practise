@@ -1,0 +1,26 @@
+int findRepeatNumber(int* nums, int numsSize){
+    //判空
+    if(numsSize == 0)
+    {
+        return -1;
+    }
+    //开辟numsSize大小的空间，并初始化为0
+    int* tem = calloc(numsSize,sizeof(int));
+    //从nums数组第一个元素开始遍历
+    //让元素的值等于新数组的下标
+    for(int i = 0;i < numsSize;++i)
+    {
+        //若存在nums[i]的值，将新数组下标为nums[i]的元素置为1
+        if(0 == tem[nums[i]])
+        {
+            tem[nums[i]] = 1;
+        }
+        //重复元素，第一次已将新数组下标为nums[i]的元素置为1
+        //第二次遍历到此数直接返回
+        else
+        {
+            return nums[i];
+        }
+    }
+    return -1;
+}
