@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isUnique(string astr) {
+        for(int i = 0;i < astr.size();++i)
+        {
+            for(int j = 0;j < astr.size();++j)
+            {
+                if(i == j)
+                {
+                    continue;
+                }
+                else
+                {
+                    if(astr[i] == astr[j])
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
