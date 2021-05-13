@@ -1,0 +1,47 @@
+//找一个哨兵节点
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ #include<list>
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        //开辟一个哨兵节点，并初始化为0
+        ListNode* head = new ListNode(0);
+        ListNode* cur = head;
+        //连接
+        while(l1 && l2)
+        {
+            if(l1->val < l2->val)
+            {
+                cur->next = l1;
+                l1 = l1->next;
+            }
+            else
+            {
+                cur->next = l2;
+                l2 = l2->next;
+            }
+            cur = cur->next;
+        }
+        //l2先结束
+        if(l1)
+        {
+            cur->next = l1;
+        }
+        //l1先结束
+        if(l2)
+        {
+            cur->next = l2;
+        }
+        //返回头节点的下一个节点
+        return head->next;
+    }
+};
