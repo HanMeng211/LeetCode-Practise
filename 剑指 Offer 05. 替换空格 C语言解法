@@ -1,0 +1,42 @@
+char* replaceSpace(char* s){
+    int n = strlen(s);
+    int count = 0;
+    //求空格的个数
+    for(int i = 0;i < n;++i)
+    {
+        if(s[i] == ' ')
+        {
+            ++count;
+        }
+    }
+    //开辟新空间
+    char* p = (char*)malloc(sizeof(char) * (n + count * 2 + 1));
+    //一个指针指向老空间，一个指针指向新空间
+    char* fast = s;
+    char* slow = p;
+    //若指向老空间的指针指向的值不为空格，则赋值给新空间，两个指针各往后走一个
+    //若指向老空间的指针指向的值为空格，则老指针向后走一个
+    //新指针指向的位置赋值‘%’向后走一个，赋值‘2’向后走一个，赋值‘0’向后走一个
+    while(*fast != '\0')
+    {
+        if(*fast != ' ')
+        {
+            *slow = *fast;
+            ++fast;
+            ++slow;
+        }
+        else
+        {
+            ++fast;
+            *slow = '%';
+            ++slow;
+            *slow = '2';
+            ++slow;
+            *slow = '0';
+            ++slow;
+        }
+    }
+    //最后给新指针的末尾赋值‘、0’
+    *slow = '\0';
+    return p;
+}
