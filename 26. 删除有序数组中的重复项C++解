@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        //判空
+        if(nums.size() == 0)
+        {
+            return 0;
+        }
+        int left = 0;
+        int right = 1;
+        //给left,right两个下标
+        //如果两个下标的值相等right向后走，直到走到两个值不相等的下标
+        //将下标为right的值赋值给left下一个位置
+        //返回left+1
+        while(right < nums.size())
+        {
+            if(nums[left] == nums[right])
+            {
+                ++right;
+            }
+            else
+            {
+                nums[++left] = nums[right];
+            }
+        }
+        return left + 1;
+    }
+};
