@@ -1,0 +1,20 @@
+int majorityElement(int* nums, int numsSize){
+    int n = numsSize / 2;
+    int count = 0;
+    int res;
+    //从第一个元素开始，如果相等count++，不等--
+    //若等于0从下一个元素开始
+    for(int i = 0;i < numsSize;++i)
+    {
+        if(count == 0)
+        {
+            res = nums[i];
+            count++;
+        }
+        else
+        {
+            res == nums[i]?count++:count--;
+        }
+    }
+    return res;
+}
